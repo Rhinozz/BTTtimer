@@ -26,7 +26,7 @@ With a file (use the actual word "file", not the path. Put your video in the BTT
 btttimer.py file [Start Method] [End Method]
 ```
 
-The only working start and end method as of 0.1a is f (fadeout). You can find the upcoming list by running
+The only working start and end methods as of 0.1a are f (fadeout) and m (moon tick). You can find the upcoming list by running
 ```
 btttimer.py -h
 ```
