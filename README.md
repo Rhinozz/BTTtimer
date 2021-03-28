@@ -24,6 +24,7 @@ Follow [these instructions](https://github.com/bedapisl/fast-colorthief) to inst
 
 ## Usage
 Note: When using the developer version, replace `btttimer.exe` with `btttimer.py`.
+
 With a URL:
 ```
 btttimer.exe [URL] [Start Method] [End Method]
