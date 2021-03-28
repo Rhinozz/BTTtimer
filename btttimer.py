@@ -13,10 +13,10 @@ args = parser.parse_args()
 
 # download video
 print('Downloading video')
-workingDir = os.getcwd()
+workingDir = os.getcwd()  # current directory
 for filename in os.listdir(workingDir):
     if filename.endswith(".mp4"):
-        os.rename(filename, 'twtdl.mp4')
+        os.rename(filename, 'twtdl.mp4')  # renames file
     else:
         continue
 if args.input != "file":
@@ -28,17 +28,17 @@ if args.input != "file":
     }
    
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([args.input])
+        ydl.download([args.input])  # downloads file
 
 # split video into frames
 os.system("ffmpeg -i twtdl.mp4 %04d.png")
 tempDir = workingDir + "\\tmp"
-os.mkdir(tempDir, 0o666)
+os.mkdir(tempDir, 0o666)  # makes temporary directories
 for file in os.listdir(workingDir):
     if file.endswith(".png"):
         copySrc = workingDir + "\\" + file
         copyDest = tempDir + "\\" + file
-        copy2(copySrc, copyDest)
+        copy2(copySrc, copyDest)  # copies frames into temp
 
 # check if methods are the same
 if args.startmethod == args.endmethod:
@@ -46,62 +46,84 @@ if args.startmethod == args.endmethod:
 else:
     sameMethods = False
 
-# scan for first load frame
-startDone = False
-for n in range(2):
-    # detects fadeout
-    if args.startmethod == "f":
-        f = None
-        firstBefore = None
-        print('Scanning for loads')
-        for file in os.listdir(workingDir):
-            if file.endswith(".png"):
-                fileFull = workingDir + "\\" + file
-                dom = fast_colorthief.get_dominant_color(fileFull, quality=1)
-                domStr = ''.join(map(str, dom))
-                if domStr != "444":
-                    os.remove(fileFull)
-                    continue
-                im = imageio.imread(fileFull, pilmode='RGB')
-                color = tuple(im[360][639])
-                colorStr = ''.join(map(str, color))
-                if colorStr != "000":
-                    os.remove(fileFull)
-                    continue
-                if sameMethods is True:
-                    fClean1 = os.path.split(fileFull)[1]
-                    fClean = fClean1.replace('.png', '')
-                    fMinus = int(fClean) - 1
-                    if f == None:
-                        f = fClean
-                    else:
-                        if int(f) == int(fMinus):
-                            f = fClean
-                            os.remove(fileFull)
-                        else:
-                            f = fClean
-                else:
-                    if firstBefore == None:
-                        firstBefore = True
-                    else:
-                        os.remove(fileFull)
-            else:
+# detects fadeout
+def fadeout():
+    f = None  # variable used as current file in detection loop
+    firstBefore = None
+    print('Scanning for loads')
+    for file in os.listdir(workingDir):
+        if file.endswith(".png"):  # for all frames
+            fileFull = workingDir + "\\" + file
+            dom = fast_colorthief.get_dominant_color(fileFull, quality=1)  # gets dominant color
+            domStr = ''.join(map(str, dom))
+            if domStr != "444":  # if dominant color isn't black
+                os.remove(fileFull)
                 continue
+            im = imageio.imread(fileFull, pilmode='RGB')
+            color = tuple(im[360][639])  # get color of middle pixel
+            colorStr = ''.join(map(str, color))
+            if colorStr != "000":  # if color isn't black
+                os.remove(fileFull)
+                continue
+            color2 = tuple(im[360][641])
+            color2Str = ''.join(map(str, color))  # gets color of next to middle pixel for 60fps adjusting
+            if color2Str != "000":
+                if startDone == False:
+                    adjustFirst = 0.0166667
+                else:
+                    adjustSecond = 0.0166667
+            else:
+                if startDone == False:
+                    adjustFirst = 0
+                else:
+                    adjustSecond = 0
+            if sameMethods is True:
+                fClean1 = os.path.split(fileFull)[1]
+                fClean = fClean1.replace('.png', '')  # gets current time
+                fMinus = int(fClean) - 1
+                if f == None:  # if first frame
+                    f = fClean  # sets first frame
+                else:
+                    if int(f) == int(fMinus):  # if frame is not the first frame of fadeout
+                        f = fClean
+                        os.remove(fileFull)  # remove frame, leaving first and last frames
+                    else:
+                        f = fClean
+            else:
+                # going to be implemented soon
+                # cross-method variables
+                print("This feature hasn't been implemented yet.")
+        else:
+            continue
+
+# get frames
+startDone = False  # checks if loop is in first or second time
+for n in range(2):
+    if startDone == False:
+        if args.startmethod == "f":
+            fadeout()
+       
+        startDone = True
+    else:
+        if args.endmethod == "f":
+            fadeout()
+        
+        break
 
 # get final time
 files = os.listdir(workingDir)
-for i in files:
+for i in files:  # lists 2 remaining frames
     if i.endswith(".png"):
         pass
     else:
         files.remove(i)
         continue
 itemsClean1 = files[0].replace('.png', '')
-firstTime = int(itemsClean1) / 30
+firstTime = int(itemsClean1) / 30  # gets first time
 itemsClean = files[1].replace('.png', '')
-secondTime = int(itemsClean) / 30
+secondTime = int(itemsClean) / 30  # gets second time
 finalTime1 = secondTime - firstTime
-finalTime = round(finalTime1, 3)
+finalTime = round(finalTime1, 3)  # gets final time
 print("Time: " + str(finalTime))
 firstRound = round(firstTime - 0.0333333, 3)
 secondRound = round(secondTime - 0.0333333, 3)
