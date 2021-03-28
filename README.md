@@ -23,22 +23,25 @@ Download ffmpeg [from here](https://ffmpeg.org/download.html) and install to PAT
 Follow [these instructions](https://github.com/bedapisl/fast-colorthief) to install fast-colorthief. On MacOS and Linux, you can run a simple pip command like above - on Windows you'll need to manually install it.
 
 ## Usage
+Note: When using the developer version, replace `btttimer.exe` with `btttimer.py`.
 With a URL:
 ```
-btttimer.py [URL] [Start Method] [End Method]
+btttimer.exe [URL] [Start Method] [End Method]
 ```
 
 With a file (use the actual word "file", not the path. Put your video in the BTTtimer directory.):
 ```
-btttimer.py file [Start Method] [End Method]
+btttimer.exe file [Start Method] [End Method]
 ```
 
 The only working start and end method as of 0.1a is f (fadeout). You can find the upcoming list by running
 ```
-btttimer.py -h
+btttimer.exe -h
 ```
 
 ## 0.2a planned features:
+- Installer onto PATH
+- Mac/Linux support (maybe)
 - Faster frame extraction with OpenCV or Decord
 - Auto 60fps timing for fadeouts
 - Moon tick support (maybe)
