@@ -1,7 +1,7 @@
 # BTTtimer
 A timer for Super Mario Odyssey BTT segements
 
-Current version: 0.1 Alpha
+Current version: 0.1.1 Alpha
 
 ## Installation
 Note: You need to be on Windows for the official installation. If you are not on Windows, you need to run it from the source - see **Dev Installation**.
@@ -37,7 +37,7 @@ With a file (use the actual word "file", not the path. Put your video in the BTT
 btttimer.exe file [Start Method] [End Method]
 ```
 
-The only working start and end method as of 0.1a is f (fadeout). You can find the upcoming list by running
+The only working start and end method as of 0.1.1a is f (fadeout). You can find the upcoming list by running
 ```
 btttimer.exe -h
 ```
@@ -46,6 +46,5 @@ btttimer.exe -h
 - Installer onto PATH
 - Mac/Linux support (maybe)
 - Faster frame extraction with OpenCV or Decord
-- Auto 60fps timing for fadeouts
 - Decimal to frame conversion in output
 - Moon tick support (maybe)
