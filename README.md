@@ -43,7 +43,6 @@ btttimer.exe -h
 ```
 
 ## 0.2a planned features:
-- Installer onto PATH
 - Mac/Linux support (maybe)
 - Faster frame extraction with OpenCV or Decord
 - Decimal to frame conversion in output
