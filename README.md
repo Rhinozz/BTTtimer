@@ -19,7 +19,9 @@ pip install youtube_dl
 pip install imageio
 ```
 You will need to manually install 2 dependencies, ffmpeg and fast-colorthief.
-Download ffmpeg [from here](https://ffmpeg.org/download.html) and install to PATH.
+
+Download ffmpeg [here](https://github.com/BtbN/FFmpeg-Builds/releases) and install onto PATH.
+
 Follow [these instructions](https://github.com/bedapisl/fast-colorthief) to install fast-colorthief. On MacOS and Linux, you can run a simple pip command like above - on Windows you'll need to manually install it.
 
 ## Usage
