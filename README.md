@@ -12,7 +12,7 @@ Then, download and run the executable.
 
 ## Dev Installation
 You need Python 3 to use BTTtimer, preferrably the newest release.
-The script is to be built into an executable in the future, but for now a Python Script will do for testing.
+
 To install the required dependencies you'll need to run a few commands:
 ```
 pip install youtube_dl
