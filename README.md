@@ -4,7 +4,9 @@ A timer for Super Mario Odyssey BTT segements
 Current version: 0.1 Alpha
 
 ## Installation
-Download the executable. If you are not on Windows, you need to run it from the source - see **Dev Installation**.
+Note: You need to be on Windows for the official installation. If you are not on Windows, you need to run it from the source - see **Dev Installation**.
+The only prerequisite needed for BTTtimer is FFmpeg. Download it [here](https://github.com/BtbN/FFmpeg-Builds/releases) and install onto PATH.
+Then, download and run the executable. 
 
 ## Dev Installation
 You need Python 3 to use BTTtimer, preferrably the newest release.
