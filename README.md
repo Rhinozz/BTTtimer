@@ -47,4 +47,5 @@ btttimer.exe -h
 - Mac/Linux support (maybe)
 - Faster frame extraction with OpenCV or Decord
 - Auto 60fps timing for fadeouts
+- Decimal to frame conversion in output
 - Moon tick support (maybe)
