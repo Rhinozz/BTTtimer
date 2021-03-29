@@ -37,13 +37,7 @@ With a file (use the actual word "file", not the path. Put your video in the BTT
 btttimer.exe file [Start Method] [End Method]
 ```
 
-The only working start and end method as of 0.1.1a is f (fadeout). You can find the upcoming list by running
+The only working start and end method as of 0.1.2a is f (fadeout). You can find the upcoming list by running
 ```
 btttimer.exe -h
 ```
-
-## 0.2a planned features:
-- Mac/Linux support (maybe)
-- Faster frame extraction with OpenCV or Decord
-- Decimal to frame conversion in output
-- Moon tick support (maybe)
